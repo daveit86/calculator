@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300&family=Roboto+Mono&family=Roboto:wght@100;400&display=swap');
+
+:root{
+
+
+}
+
+body{
+    font-family: 'Anek Malayalam', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+}
