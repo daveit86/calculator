@@ -223,6 +223,8 @@ allBtns.forEach(element => {
 //Keyboard listener
 window.addEventListener('keydown',(e)=>{
     debugConsoleLog("Key listener code",e.keyCode);
+    clickAudio.currentTime=0;
+    clickAudio.play();
     switch(e.keyCode){
         case 48: case 96: digit("0");
         break;
