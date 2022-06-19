@@ -57,7 +57,7 @@ body{
     flex-direction: column;
     box-sizing: border-box;
     width:var(--display-width);
-    height: calc(2*var(--btn-height));
+    min-height: calc(2*var(--btn-height));
     background-color: var(--display-color);
     border:var(--btn-border);
     border-style: inset;
@@ -69,11 +69,16 @@ body{
 #display *{
     background-color: bisque;
     width: 100%;
+    word-break: break-all;
 }
 
 #display .top{
     font-size: 1.2;
     flex: 1;
+}
+
+#display .top .operator{
+    margin-left: var(--btn-margin);
 }
 
 #display .bottom{
