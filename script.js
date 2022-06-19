@@ -79,14 +79,20 @@ function digit(e)
     console.log(`Pressed digit ${value}!`);
     if(numBottom==undefined)
     {
-        numBottom=parseFloat(value);
+        if(value==".")
+        {
+            numBottom="0.";
+        }
+        else
+        {
+            numBottom=value;
+        }
+        
         update_display();
     }
     else
     {
-        let text=numBottom.toString();
-        text+=value;
-        numBottom=parseFloat(text);
+        numBottom+=value;
         update_display();
     }
 
@@ -126,7 +132,7 @@ function equal(e){
     if(numTop!=undefined&&numBottom!=undefined&&tempOp!=undefined)
     {
         result=calculate(tempOp,numTop,numBottom);
-        numBottom=result;
+        numBottom=result.toString();
         numTop=result;
         tempOp=undefined;
         update_display();
@@ -136,6 +142,8 @@ function equal(e){
 
 function calculate(op,num1,num2)
 {
+    num1=parseFloat(num1);
+    num2=parseFloat(num2);
     console.log(`Calculating ${num1} ${op} ${num2}`);
     switch (op){
         case '+': return num1+num2;
