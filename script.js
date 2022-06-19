@@ -73,9 +73,8 @@ function delete_btn()
     
 }
 
-function digit(e)
+function digit(value)
 {
-    let value=e.target.getAttribute("value");
     console.log(`Pressed digit ${value}!`);
     if(numBottom==undefined)
     {
@@ -110,9 +109,8 @@ function digit(e)
 
 }
 
-function operator(e)
+function operator(value)
 {
-    let value=e.target.getAttribute("value");
     console.log(`Pressed operator ${value}!`);
     let oldOP=tempOp;
     tempOp=value;
@@ -139,7 +137,7 @@ function operator(e)
     }
 }
 
-function equal(e){
+function equal(){
     let result=0;
     if(numTop!=undefined&&numBottom!=undefined&&tempOp!=undefined)
     {
@@ -204,10 +202,14 @@ function update_display()
 clearBtn.addEventListener("click",clear_btn);
 deleteBtn.addEventListener("click",delete_btn);
 digitBtns.forEach(element => {
-    element.addEventListener("click",digit);
+    element.addEventListener("click",(e)=>{
+    digit(e.target.getAttribute("value"));
+    });
 });
 operatorBtns.forEach(element => {
-    element.addEventListener("click",operator);
+    element.addEventListener("click",(e)=>{
+        operator(e.target.getAttribute("value"));
+    });
 });
 equalBtn.addEventListener("click",equal);
 allBtns.forEach(element => {
@@ -218,3 +220,47 @@ allBtns.forEach(element => {
 })
 
 
+//Keyboard listener
+window.addEventListener('keydown',(e)=>{
+    debugConsoleLog("Key listener code",e.keyCode);
+    switch(e.keyCode){
+        case 48: case 96: digit("0");
+        break;
+        case 49: case 97: digit("1");
+        break;
+        case 50: case 98: digit("2");
+        break;
+        case 51: case 99: digit("3");
+        break;
+        case 52: case 100: digit("4");
+        break;
+        case 53: case 101: digit("5");
+        break;
+        case 54: case 102: digit("6");
+        break;
+        case 55: case 103: digit("7");
+        break;
+        case 56: case 104: digit("8");
+        break;
+        case 57: case 105: digit("9");
+        break;
+        case 111: operator(":");
+        break;
+        case 106: operator("x");
+        break;
+        case 107: operator("+");
+        break;
+        case 109: operator("-");
+        break;
+        case 110: case 190: digit(".");
+        break;
+        case 8:  delete_btn();
+        break;
+        case 46:  clear_btn();
+        break;
+        case 110: case 190: digit(".");
+        break;
+        case 13: equal();
+        break;
+    }
+})
