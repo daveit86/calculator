@@ -20,7 +20,6 @@ function debugConsoleLog(msg,text)
 }
 
 //Useful variables
-let isOpLoaded=false;
 let numTop=undefined;
 let numBottom=undefined;
 let tempOp=undefined;
@@ -33,7 +32,11 @@ const clearBtn=document.querySelector("#clear");
 const deleteBtn=document.querySelector("#delete");
 const digitBtns=Array.from(document.querySelectorAll(".digit"));
 const operatorBtns=Array.from(document.querySelectorAll(".operator"));
+const allBtns=Array.from(document.querySelectorAll(".btn"));
 const equalBtn=document.querySelector(".equal");
+
+//Audio
+const clickAudio=document.querySelector(".audio");
 
 //var check block
 debugConsoleLog("Bottom display", displayBottom);
@@ -44,6 +47,7 @@ debugConsoleLog("Delete button",deleteBtn);
 debugConsoleLog("Digit buttons",digitBtns);
 debugConsoleLog("Operator buttons",operatorBtns);
 debugConsoleLog("Equal button",equalBtn);
+debugConsoleLog("Click audio clip",clickAudio);
 
 
 //Buttons functions
@@ -92,11 +96,13 @@ function operator(e)
 {
     let value=e.target.getAttribute("value");
     console.log(`Pressed operator ${value}!`);
+    let oldOP=tempOp;
     tempOp=value;
     update_display();
     let result=0;
     if(numBottom!=undefined)
     {
+        
         if(numTop==undefined)
         {
             numTop=numBottom;
@@ -104,13 +110,14 @@ function operator(e)
         }
         else
         {
-            result=calculate(value,numTop,numBottom);
+            result=calculate(oldOP,numTop,numBottom);
             tempOp=value
             numBottom=result;
             numTop=result;
             update_display();
         }
         numBottom=undefined;
+        tempOp=value;
     }
 }
 
@@ -183,3 +190,11 @@ operatorBtns.forEach(element => {
     element.addEventListener("click",operator);
 });
 equalBtn.addEventListener("click",equal);
+allBtns.forEach(element => {
+    element.addEventListener("click",(e)=>{
+        clickAudio.currentTime=0;
+        clickAudio.play();
+    })
+})
+
+
