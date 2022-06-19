@@ -85,6 +85,7 @@ function digit(e)
         }
         else
         {
+
             numBottom=value;
         }
         
@@ -92,7 +93,18 @@ function digit(e)
     }
     else
     {
-        numBottom+=value;
+        if(value==".")
+        {
+            if(!numBottom.includes("."))
+            {
+                numBottom+=value;
+            }
+        }
+        else
+        {
+            numBottom+=value;
+        }
+        
         update_display();
     }
 
