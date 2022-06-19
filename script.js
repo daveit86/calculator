@@ -93,6 +93,7 @@ function operator(e)
     let value=e.target.getAttribute("value");
     console.log(`Pressed operator ${value}!`);
     tempOp=value;
+    update_display();
     let result=0;
     if(numBottom!=undefined)
     {
